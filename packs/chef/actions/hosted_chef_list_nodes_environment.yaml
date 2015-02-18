@@ -1,0 +1,11 @@
+---
+name: hosted_chef_list_nodes_environment
+runner_type: run-python
+description: List nodes from environment from Hosted Chef
+enabled: true
+entry_point: hosted_chef_list_nodes_environment.py
+parameters::
+	name:
+		type: string
+		description: Name of environment
+		required: true

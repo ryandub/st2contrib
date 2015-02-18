@@ -1,0 +1,7 @@
+---
+name: hosted_chef_list_environments
+runner_type: run-python
+description: List environments from Hosted Chef
+enabled: true
+entry_point: hosted_chef_list_environments.py
+parameters: {}

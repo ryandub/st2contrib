@@ -1,0 +1,15 @@
+---
+name: hosted_chef_update_environment
+runner_type: run-python
+description: Update environment in Hosted Chef
+enabled: true
+entry_point: hosted_chef_update_environment.py
+parameters:
+    environment:
+        type: string
+        description: Name of environment
+        required: true
+    update:
+        type: string
+        description: Update to apply in JSON format
+        required: true
