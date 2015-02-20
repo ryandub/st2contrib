@@ -1,0 +1,38 @@
+---
+  name: "post_attachment"
+  runner_type: "run-python"
+  description: "Post a message attachment to the Slack channel."
+  enabled: true
+  entry_point: "post_attachment.py"
+  parameters:
+    fallback:
+      type: "string"
+      description: "Fallback plain-text message"
+      required: true
+    pretext:
+      type: "string"
+      description: "Message pretext"
+    title:
+      type: "string"
+      description: "Message title"
+    title_link:
+      type: "string"
+      description: "Link for title"
+    message:
+      type: "string"
+      description: "Message to send"
+      required: true
+    color:
+      type: "string"
+      description: "Message status color"
+    username:
+      type: "string"
+      description: "Bot username."
+      required: false
+    channel:
+      type: "string"
+      description: "Optional channel to post to"
+    icon_emoji:
+      type: "string"
+      description: "Bot icon"
+      required: false
