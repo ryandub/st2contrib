@@ -1,0 +1,7 @@
+---
+name: show_server_version
+runner_type: run-python
+description: Return server version
+enabled: true
+entry_point: show_server_version.py
+parameters: {}

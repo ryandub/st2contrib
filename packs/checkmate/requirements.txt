@@ -1,0 +1,1 @@
+git+ssh://git@github.com/samstav/pawn.git@hackathon#egg=pawn
