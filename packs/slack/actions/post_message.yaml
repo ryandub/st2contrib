@@ -9,6 +9,10 @@
       type: "string"
       description: "Message to send."
       required: true
+    attachments:
+      type: "object"
+      description: "Attachments to send."
+      required: false
     username:
       type: "string"
       description: "Bot username."

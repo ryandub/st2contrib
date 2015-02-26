@@ -11,20 +11,29 @@ __all__ = [
 
 
 class PostMessageAction(Action):
-    def run(self, message, username=None, icon_emoji=None, channel=None):
+    def run(self, message, username=None, icon_emoji=None, channel=None,
+            attachments=None):
         config = self.config['post_message_action']
         username = username if username else config['username']
-        icon_emoji = icon_emoji if icon_emoji else config.get('icon_emoji', None)
-
+        icon_emoji = icon_emoji if icon_emoji else config.get('icon_emoji',
+                                                              None)
+        channel = channel if channel else config.get('channel', None)
         headers = {}
         headers['Content-Type'] = 'application/x-www-form-urlencoded'
         body = {
             'username': username,
             'icon_emoji': icon_emoji,
-            'text': message
+            'text': message,
         }
+
         if channel is not None:
             body['channel'] = channel
+
+        if attachments:
+            if not isinstance(attachments, list):
+                attachments = [attachments]
+            body['attachments'] = attachments
+
         data = 'payload=%s' % (json.dumps(body))
         response = requests.post(url=config['webhook_url'],
                                  headers=headers, data=data)
@@ -32,6 +41,7 @@ class PostMessageAction(Action):
         if response.status_code == httplib.OK:
             self.logger.info('Message successfully posted')
         else:
-            self.logger.exception('Failed to post message: %s' % (response.text))
+            self.logger.exception('Failed to post message: %s' % (
+                response.text))
 
         return True
