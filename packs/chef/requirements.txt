@@ -1,0 +1,1 @@
+git+https://github.com/ryandub/pychef.git@cryptofix

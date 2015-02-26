@@ -1,0 +1,7 @@
+---
+name: hosted_chef_list_nodes
+runner_type: run-python
+description: List nodes from Hosted Chef
+enabled: true
+entry_point: hosted_chef_list_nodes.py
+parameters: {}
