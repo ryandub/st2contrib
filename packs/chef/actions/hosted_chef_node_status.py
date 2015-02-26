@@ -1,4 +1,4 @@
-import time
+import arrow
 from lib.hosted_chef_action import HostedChefBaseAction
 
 __all__ = [
@@ -8,25 +8,18 @@ __all__ = [
 
 class NodesStatusAction(HostedChefBaseAction):
     def run(self):
-        nodes = self.nodes.keys()
-        now = int(time.time())
+        expiry = arrow.now('-00:30')
         node_status = []
-        for n in nodes:
-            last_checked_in = n.attributes['ohai_time']
-            os = n.attributes['platform']
-            pretty_time = time.strftime("%Y-%m-%d %H:%M:%S", last_checked_in)
-
-            if now - last_checked_in > 1800:
-                status = 'unhealthy'
-            else:
-                status = 'healthy'
-
+        for n_id in self.nodes:
+            node = self.node(n_id)
+            last_checked_in = arrow.get(node['ohai_time'])
+            status = 'unhealthy' if last_checked_in > expiry else 'healthy'
+            pretty_time = last_checked_in.humanize()
             node_status.append({
-                'name': n,
-                'os': os,
-                'environment': environment,
+                'node': node['hostname'],
+                'os': node['platform'],
                 'status': status,
                 'last checkin': pretty_time,
-            })
+             })
 
         return node_status
