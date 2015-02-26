@@ -1,0 +1,7 @@
+---
+name: hosted_chef_node_status
+runner_type: run-python
+description: Get status of nodes from Hosted Chef
+enabled: true
+entry_point: hosted_chef_node_status.py
+parameters: {}
