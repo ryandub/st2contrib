@@ -1,0 +1,10 @@
+---
+name: get_deployment
+runner_type: run-python
+description: Return specific deployment for tenant
+enabled: true
+entry_point: get_deployment.py
+parameters:
+  deployment_id:
+    type: "string"
+    description: "Deployment ID of deployment to return"

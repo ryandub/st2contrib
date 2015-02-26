@@ -6,5 +6,6 @@ __all__ = [
 
 
 class ListDeploymentsAction(CheckmateBaseAction):
-    def run(self):
-        return self.list_deployments()
+
+    def run(self, **query):
+        return self.list_deployments(**query)

@@ -4,4 +4,7 @@ runner_type: run-python
 description: Show deployments for tenant
 enabled: true
 entry_point: list_deployments.py
-parameters: {}
+parameters:
+  status:
+    type: "string"
+    description: 'Status of deployments to list'
