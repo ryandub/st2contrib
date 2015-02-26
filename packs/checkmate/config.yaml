@@ -1,0 +1,6 @@
+---
+# used to authenticate pawn CheckmateClient
+
+tenant_credentials:
+  username: ''
+  apikey: ''

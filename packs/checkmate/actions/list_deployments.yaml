@@ -1,0 +1,7 @@
+---
+name: list_deployments
+runner_type: run-python
+description: Show deployments for tenant
+enabled: true
+entry_point: list_deployments.py
+parameters: {}
