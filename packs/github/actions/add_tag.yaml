@@ -1,0 +1,32 @@
+---
+name: add_tag
+runner_type: run-python
+description: Add tag to Github repository
+enabled: true
+entry_point: add_tag.py
+parameters:
+  user:
+    type: string
+    description: "Github user"
+    required: true
+  repo:
+    type: string
+    description: "Github repo"
+    required: true
+  tag:
+    type: string
+    description: "Name of tag to add"
+    required: true
+  message:
+    type: string
+    description: "Message for tag"
+    required: true
+  object:
+    type: string
+    description: "SHA to add tag to"
+    required: true
+  type:
+    type: string
+    description: "Tag type"
+    required: false
+    default: "commit"
