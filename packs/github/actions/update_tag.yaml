@@ -1,0 +1,23 @@
+---
+name: update_tag 
+runner_type: run-python
+description: Update a tag in a Github repository
+enabled: true
+entry_point: update_tag.py
+parameters:
+  user:
+    type: string
+    description: "Github user"
+    required: true
+  repo:
+    type: string
+    description: "Github repo"
+    required: true
+  tag:
+    type: string
+    description: "Name of tag to add"
+    required: true
+  object:
+    type: string
+    description: "SHA to add tag to"
+    required: true
