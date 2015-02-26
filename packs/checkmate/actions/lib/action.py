@@ -24,9 +24,15 @@ class CheckmateBaseAction(Action):
     def version(self):
         return self.checkmateclient.server_version()
 
-    def list_deployments(self):
+    def list_deployments(self, limit=5, offset=0, status='UP', **query):
 
-        path = "/%s/deployments" % self.checkmateclient.tenant
-        return self.checkmateclient.get(path).json()['results']
+        status = status or 'UP'
+        limit = limit if limit <= 5 else 5
+        return self.checkmateclient.list_deployments(
+                limit=limit, offset=offset, status=status, **query)
+
+    def get_deployment(self, deployment_id):
+
+        return self.checkmateclient.get_deployment(deployment_id)
 
 
