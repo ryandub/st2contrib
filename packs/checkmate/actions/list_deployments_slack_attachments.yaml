@@ -1,0 +1,11 @@
+---
+  name: "list_deployments_slack_attachments"
+  runner_type: "run-python"
+  description: "Format the Checkmate deploymentlist for a Slack attachment."
+  enabled: true
+  entry_point: "list_deployments_slack_attachments.py"
+  parameters:
+    deployments:
+      type: "object"
+      description: "Dictionary of Checkmate deployments."
+      required: true
