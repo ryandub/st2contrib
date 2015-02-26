@@ -20,4 +20,5 @@ parameters:
   object:
     type: string
     description: "SHA to add tag to"
-    required: true
+    required: false
+    default: 'master'
