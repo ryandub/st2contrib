@@ -10,7 +10,7 @@ __all__ = [
 
 class CheckmateBaseAction(Action):
 
-    def __init__(self, config):
+    def __init__(self, config=None):
         super(CheckmateBaseAction, self).__init__(config)
         self.checkmateclient = client.CheckmateClient()
         tenant_creds = config.get('tenant_credentials') or {}
@@ -29,10 +29,15 @@ class CheckmateBaseAction(Action):
         status = status or 'UP'
         limit = limit if limit <= 5 else 5
         return self.checkmateclient.list_deployments(
-                limit=limit, offset=offset, status=status, **query)
+            limit=limit, offset=offset, status=status, **query)
 
     def get_deployment(self, deployment_id):
-
-        return self.checkmateclient.get_deployment(deployment_id)
-
-
+        deployment = self.checkmateclient.get_deployment(deployment_id)
+        ret = {
+            'status': deployment.get('status'),
+            'resources': deployment.get('resources'),
+            'name': deployment.get('name'),
+            'id': deployment.get('id'),
+            'created': deployment.get('created'),
+        }
+        return ret
