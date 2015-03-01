@@ -6,6 +6,6 @@
   entry_point: "list_deployments_slack_attachments.py"
   parameters:
     deployments:
-      type: "object"
+      type: "string"
       description: "Dictionary of Checkmate deployments."
       required: true

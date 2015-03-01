@@ -1,3 +1,5 @@
+import json
+
 from st2actions.runners.pythonrunner import Action
 
 __all__ = [
@@ -85,7 +87,8 @@ def resources_to_slack_attachments(resources):
 class ShowDeploymentSlackFormatAction(Action):
     def run(self, deployment):
         """Deployment is the full JSON object of a Checkmate deployment."""
+        deployment = json.loads(deployment)
         slack_attachments = resources_to_slack_attachments(
             deployment.get("resources"))
 
-        return slack_attachments
+        return json.dumps(slack_attachments)

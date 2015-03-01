@@ -1,0 +1,6 @@
+name: "slack_list_deployments_workflow"
+runner_type: "action-chain"
+description: "List deployments in Checkmate and format for Slack Message"
+enabled: true
+entry_point: "slack_list_deployments_workflow.yaml"
+parameters: {}

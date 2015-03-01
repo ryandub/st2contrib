@@ -1,3 +1,5 @@
+import json
+
 from lib.action import CheckmateBaseAction
 
 __all__ = [
@@ -8,4 +10,4 @@ __all__ = [
 class ListDeploymentsAction(CheckmateBaseAction):
 
     def run(self, **query):
-        return self.list_deployments(**query)
+        return json.dumps(self.list_deployments(**query))

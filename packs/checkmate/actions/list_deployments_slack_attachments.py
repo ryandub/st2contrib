@@ -1,3 +1,5 @@
+import json
+
 from st2actions.runners.pythonrunner import Action
 
 __all__ = [
@@ -6,7 +8,7 @@ __all__ = [
 
 
 def status_to_color(status):
-    if status in ['NEW', 'ONLINE', 'ACTIVE']:
+    if status in ['NEW', 'ONLINE', 'ACTIVE', 'UP']:
         return 'good'
     if status in ['ERROR', 'DELETED', 'DELETING', 'OFFLINE']:
         return 'danger'
@@ -18,6 +20,8 @@ def status_to_color(status):
 class ListDeploymentsSlackFormatAction(Action):
     def run(self, deployments):
         slack_attachments = []
+        deployments = json.loads(deployments)
+        deployments = deployments.get('results')
         for deployment_id, deployment in deployments.iteritems():
             slack_attachments.append({
                 'color': status_to_color(deployment['status']),
@@ -27,4 +31,4 @@ class ListDeploymentsSlackFormatAction(Action):
                     "1ef0f0e3a1f.r87.cf1.rackcdn.com/deployments-logo.png"),
                 'text': deployment['blueprint']['description'],
             })
-        return slack_attachments
+        return json.dumps(slack_attachments)
