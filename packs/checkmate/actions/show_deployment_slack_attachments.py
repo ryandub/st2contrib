@@ -62,18 +62,27 @@ def resources_to_slack_attachments(resources):
     """Resources is the full JSON object in a Checkmate deployment"""
     data = []
     for resource_id, resource_data in resources.iteritems():
-        if 'status' in resource_data and 'component' in resource_data:
+        if 'status' in resource_data and 'type' in resource_data:
+            text = []
+            text.append('Type: %s' % resource_data.get('type'))
 
-            text = 'Role: ' + resource_data.get('component')
+            if 'instance' in resource_data:
+                if resource_data['instance'].get('id'):
+                    text.append('ID: %s' % resource_data['instance'].get(
+                        'id'))
+                if resource_data['instance'].get('host_region'):
+                    text.append('Region: %s' %
+                                resource_data['instance'].get('host_region'))
+                elif resource_data.get('desired-state'):
+                    dstate = resource_data.get('desired-state')
+                    if dstate.get('region'):
+                        text.append('Region: %s' % dstate.get('region'))
+            if 'status' in resource_data:
+                text.append('Status: %s' % resource_data.get('status'))
+
             name = resource_data.get("dns-name", 'Unknown Name')
 
-            if('lb' in resource_data.get('service') or
-               'load' in resource_data.get('service') or
-               'lb' in resource_data.get('component') or
-               'load' in resource_data.get('component')):
-                text += ' ('
-                text += resource_data['desired-state'].get('region')
-                text += ')'
+            text = '\n'.join(text)
 
             data.append({
                 "color": status_to_color(resource_data.get("status")),
