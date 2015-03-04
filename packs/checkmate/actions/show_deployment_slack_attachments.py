@@ -82,7 +82,11 @@ def resources_to_slack_attachments(resources):
                     if dstate.get('region'):
                         text.append('Region: %s' % dstate.get('region'))
             if 'status' in resource_data:
-                text.append('Status: %s' % resource_data.get('status'))
+                status = resource_data.get('status').lower()
+                text.append('Status: %s' % status.capitalize())
+            if 'hosts' in resource_data:
+                for host in resource_data['hosts']:
+                    text.append('Hosts: %s' % resources[host]['component'])
 
             name = resource_data.get("dns-name", 'Unknown Name')
 
