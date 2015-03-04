@@ -63,6 +63,10 @@ def resources_to_slack_attachments(resources):
     data = []
     for resource_id, resource_data in resources.iteritems():
         if 'status' in resource_data and 'type' in resource_data:
+
+            if resource_data['type'] in ['application', 'volume', 'database']:
+                continue
+
             text = []
             text.append('Type: %s' % resource_data.get('type'))
 
