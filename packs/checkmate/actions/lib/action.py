@@ -1,4 +1,5 @@
 
+import requests
 from pawn import client
 
 from st2actions.runners.pythonrunner import Action
@@ -41,3 +42,9 @@ class CheckmateBaseAction(Action):
             'created': deployment.get('created'),
         }
         return ret
+
+    def add_nodes(self, deployment_id, service, count=1):
+        """Add nodes to an existing deployment."""
+        response = self.checkmateclient.add_nodes(deployment_id, service,
+                                                  count)
+        return response.status_code == requests.codes.ok
