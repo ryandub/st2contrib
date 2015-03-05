@@ -1,7 +1,6 @@
 import json
 
 import eventlet
-import time
 from slackclient import SlackClient
 
 from st2reactor.sensor.base import PollingSensor
@@ -37,7 +36,7 @@ class SlackSensor(PollingSensor):
             raise Exception(msg)
 
         self._populate_cache(user_data=self._api_call('users.list'),
-                                channel_data=self._api_call('channels.list'))
+                             channel_data=self._api_call('channels.list'))
 
     def poll(self):
         result = self._client.rtm_read()
@@ -79,7 +78,8 @@ class SlackSensor(PollingSensor):
         trigger = 'slack.message'
 
         if 'subtype' in data:
-            # 'user_typing' events may not actually have text, but represent a state change
+            # 'user_typing' events may not actually have text,
+            # but represent a state change
             return
 
         # Note: We resolve user and channel information to provide more context
@@ -115,7 +115,8 @@ class SlackSensor(PollingSensor):
 
     def _get_channel_info(self, channel_id):
         if channel_id not in self._channel_info_cache:
-            result = self._api_call('channels.info', channel=channel_id)['channel']
+            result = self._api_call('channels.info',
+                                    channel=channel_id)['channel']
             self._channel_info_cache[channel_id] = result
 
         return self._channel_info_cache[channel_id]
