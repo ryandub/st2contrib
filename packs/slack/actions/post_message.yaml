@@ -10,7 +10,7 @@
       description: "Message to send."
       required: true
     attachments:
-      type: "object"
+      type: "string"
       description: "Attachments to send."
       required: false
     username:

@@ -30,10 +30,8 @@ class PostMessageAction(Action):
             body['channel'] = channel
 
         if attachments:
-            if not isinstance(attachments, list):
-                attachments = [attachments]
+            attachments = json.loads(attachments)
             body['attachments'] = attachments
-
         data = 'payload=%s' % (json.dumps(body))
         response = requests.post(url=config['webhook_url'],
                                  headers=headers, data=data)
