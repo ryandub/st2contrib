@@ -9,14 +9,17 @@
       type: "string"
       description: "Message to send."
       required: true
+    attachments:
+      type: "string"
+      description: "Attachments to send."
+      required: false
     username:
       type: "string"
       description: "Bot username."
       required: false
     channel:
       type: "string"
-      description: "Optional channel to post to. Note channel must contain leading #"
-      required: false
+      description: "Optional channel to post to"
     icon_emoji:
       type: "string"
       description: "Bot icon"
